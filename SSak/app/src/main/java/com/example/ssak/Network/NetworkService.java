@@ -1,7 +1,22 @@
 package com.example.ssak.Network;
 
+import com.example.ssak.Post.PostLoginResponse;
+import com.google.gson.JsonObject;
+
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.Header;
+import retrofit2.http.POST;
+
 public interface NetworkService {
 
     // Customized by SY
+
+    // 카카오톡 로그인
+    @POST("user")
+    Call<PostLoginResponse> postLoginResponse (
+            @Header("Content-type") String content_type,
+            @Body() JsonObject body
+    );
 
 }
