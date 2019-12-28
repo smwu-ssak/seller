@@ -77,6 +77,7 @@ public class KakaoSignupActivity extends Activity {
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("token", token);
+        jsonObject.put("userWho", 1);
         JsonObject gsonObject = (JsonObject) new JsonParser().parse(jsonObject.toString());
 
         Call<PostLoginResponse> call = networkService.postLoginResponse("application/json", gsonObject);
