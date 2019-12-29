@@ -17,6 +17,16 @@
         android:text="MainActivity"
         android:layout_centerInParent="true"/>
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/product_upload"
+        android:src="@drawable/appicon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"/>
+
     <!-- 지도 테스트용 -->
 <!--    <net.daum.mf.map.api.MapView-->
 <!--        android:id="@+id/my_location"-->
