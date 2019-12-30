@@ -9,7 +9,7 @@
     android:layout_height="match_parent"
     android:background="#ECECEC"
     android:orientation="vertical"
-    tools:context=".RegisterLocation">
+    tools:context=".RegisterLocationActivity">
 
     <!--상단 툴바-->
     <RelativeLayout
