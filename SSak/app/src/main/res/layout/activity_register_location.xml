@@ -18,26 +18,6 @@
         android:layout_height="50dp"
         android:background="#F4F4F4">
 
-        <!--뒤로 가기 버튼-->
-        <RelativeLayout
-            android:id="@+id/register_location_act_back_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:background="?android:selectableItemBackground"
-            android:padding="6dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/editprofile_previouspage" />
-
-        </RelativeLayout>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,21 +37,102 @@
 
     <!--하단 버튼-->
     <RelativeLayout
-        android:id="@+id/register_location_act_bottom_btn"
         android:layout_width="match_parent"
         android:layout_height="67dp"
         android:layout_alignParentBottom="true"
         android:layout_centerVertical="true"
         android:background="#46AE7F">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:fontFamily="@font/nanumbarungothicbold_normal"
-            android:text="다음 단계"
-            android:textColor="#FFFFFF"
-            android:textSize="24dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="2">
+
+            <!--이전 단계-->
+            <LinearLayout
+                android:id="@+id/register_location_act_back_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/location_text_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nanumbarungothiclight_normal"
+                        android:gravity="center_horizontal"
+                        android:text="위치를 다시 설정할래요"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/location_text_3"
+                        android:background="#00ff0000"
+                        android:fontFamily="@font/nanumbarungothicbold_normal"
+                        android:gravity="center"
+                        android:stateListAnimator="@null"
+                        android:text="이전 단계"
+                        android:textColor="#FFFFFF"
+                        android:textSize="24dp" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#009245" />
+
+            <!--다음 단계-->
+            <LinearLayout
+                android:id="@+id/register_location_act_next_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/location_text_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nanumbarungothiclight_normal"
+                        android:gravity="center_horizontal"
+                        android:text="이 위치가 맞아요"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/location_text_4"
+                        android:background="#00ff0000"
+                        android:fontFamily="@font/nanumbarungothicbold_normal"
+                        android:gravity="center"
+                        android:stateListAnimator="@null"
+                        android:text="다음 단계"
+                        android:textColor="#FFFFFF"
+                        android:textSize="24dp" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
 
     </RelativeLayout>
 
