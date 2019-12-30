@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--Customized by MS-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ECECEC"
+    android:orientation="vertical"
+    tools:context=".RegisterTimeActivity">
+
+    <!--상단 툴바-->
+    <RelativeLayout
+        android:id="@+id/register_time_act_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#F4F4F4">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/nanumbarungothicbold_normal"
+            android:text="판매자 등록"
+            android:textColor="#3A3A3A"
+            android:textSize="24dp" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignBottom="@id/register_time_act_toolbar"
+        android:background="#BDBDBD" />
+
+    <!--하단 버튼-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:background="#46AE7F">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="2">
+
+            <!--이전 단계-->
+            <LinearLayout
+                android:id="@+id/register_time_act_back_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#00ff0000"
+                    android:fontFamily="@font/nanumbarungothicbold_normal"
+                    android:gravity="center"
+                    android:stateListAnimator="@null"
+                    android:text="이전 단계"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24dp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#009245" />
+
+            <!--다음 단계-->
+            <LinearLayout
+                android:id="@+id/register_time_act_next_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#00ff0000"
+                    android:fontFamily="@font/nanumbarungothicbold_normal"
+                    android:gravity="center"
+                    android:stateListAnimator="@null"
+                    android:text="다음 단계"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <!--뷰-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="67dp">
+
+        <!--등록 진도-->
+        <TextView
+            android:id="@+id/time_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/nanumbarungothicbold_normal"
+            android:text="3 / 4"
+            android:textColor="#848484"
+            android:textSize="18dp" />
+
+        <!--본문-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/time_progress"
+            android:layout_marginTop="20dp">
+
+            <RelativeLayout
+                android:id="@+id/time_text_fix"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!--고정 텍스트-->
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true">
+
+                    <TextView
+                        android:id="@+id/time_text_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:fontFamily="@font/nanumbarungothicbold_normal"
+                        android:text="우리 가게의"
+                        android:textColor="#3A3A3A"
+                        android:textSize="22dp" />
+
+                    <TextView
+                        android:id="@+id/time_text_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/time_text_1"
+                        android:layout_centerHorizontal="true"
+                        android:fontFamily="@font/nanumbarungothicbold_normal"
+                        android:text="영업 시간과 요일은"
+                        android:textColor="#3A3A3A"
+                        android:textSize="22dp" />
+
+                    <TextView
+                        android:id="@+id/time_text_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/time_text_2"
+                        android:layout_centerHorizontal="true"
+                        android:fontFamily="@font/nanumbarungothicbold_normal"
+                        android:text="언제인가요?"
+                        android:textColor="#3A3A3A"
+                        android:textSize="22dp" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_register_time"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/time_text_fix"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="38dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
