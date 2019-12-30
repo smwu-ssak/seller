@@ -9,7 +9,7 @@
     android:layout_height="match_parent"
     android:background="#ECECEC"
     android:orientation="vertical"
-    tools:context=".RegisterProfile">
+    tools:context=".RegisterProfileActivity">
 
     <!--상단 툴바-->
     <RelativeLayout
@@ -152,12 +152,13 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/register_profile_act_store_img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/appicon" />
 
                 <ImageView
+                    android:id="@+id/register_profile_act_stor_img_edit_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignRight="@id/register_profile_act_store_img"
@@ -176,7 +177,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/nanumbarungothicbold_normal"
                 android:maxLength="20"
-                android:text="    가게 이름    "
+                android:hint="가게 이름"
                 android:textColor="#6E6E6E"
                 android:textSize="20dp" />
 
