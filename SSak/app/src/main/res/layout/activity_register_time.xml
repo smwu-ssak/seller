@@ -56,16 +56,35 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#00ff0000"
-                    android:fontFamily="@font/nanumbarungothicbold_normal"
-                    android:gravity="center"
-                    android:stateListAnimator="@null"
-                    android:text="이전 단계"
-                    android:textColor="#FFFFFF"
-                    android:textSize="24dp" />
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/time_text_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nanumbarungothiclight_normal"
+                        android:gravity="center_horizontal"
+                        android:text="영업 시간과 요일이 달라요"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/time_text_4"
+                        android:background="#00ff0000"
+                        android:fontFamily="@font/nanumbarungothicbold_normal"
+                        android:gravity="center"
+                        android:stateListAnimator="@null"
+                        android:text="이전 단계"
+                        android:textColor="#FFFFFF"
+                        android:textSize="24dp" />
+
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -82,16 +101,34 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#00ff0000"
-                    android:fontFamily="@font/nanumbarungothicbold_normal"
-                    android:gravity="center"
-                    android:stateListAnimator="@null"
-                    android:text="다음 단계"
-                    android:textColor="#FFFFFF"
-                    android:textSize="24dp" />
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/time_text_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nanumbarungothiclight_normal"
+                        android:gravity="center_horizontal"
+                        android:text="이 정보가 맞아요"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/time_text_5"
+                        android:background="#00ff0000"
+                        android:fontFamily="@font/nanumbarungothicbold_normal"
+                        android:gravity="center"
+                        android:stateListAnimator="@null"
+                        android:text="다음 단계"
+                        android:textColor="#FFFFFF"
+                        android:textSize="24dp" />
+
+                </RelativeLayout>
 
             </LinearLayout>
 
