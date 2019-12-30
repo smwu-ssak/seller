@@ -88,18 +88,24 @@
             <RelativeLayout
                 android:id="@+id/upload_product_img_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="240dp"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="16dp"
-                android:background="@drawable/custom_dot_line">
+                android:layout_marginVertical="16dp">
 
                 <ImageView
                     android:id="@+id/upload_product_img_iv"
+                    android:scaleType="fitXY"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/detailview_productphoto"
+                    android:padding="5dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginVertical="16dp"/>
+                    android:background="@drawable/custom_dot_line"/>
+
+                <ImageView
+                    android:src="@drawable/sellerview_plus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true" />
 
             </RelativeLayout>
 
@@ -390,107 +396,10 @@
 
                 </RelativeLayout>
 
-                <!--지도, 지도 설명-->
-
-                <!--박스-->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <RelativeLayout
-                        android:id="@+id/upload_store_location_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_marginTop="40dp"
-                        android:layout_marginHorizontal="56dp">
-
-                        <RelativeLayout
-                            android:id="@+id/map_view"
-                            android:layout_width="match_parent"
-                            android:layout_height="250dp">
-
-<!--                        <ImageView-->
-<!--                            android:id="@+id/detail_act_img_gps"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_centerHorizontal="true"-->
-<!--                            android:src="@drawable/detailview_mappreview" />-->
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/map_view"
-                            android:background="#63C194">
-
-                            <TextView
-                                android:id="@+id/upload_gps_store_name"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerHorizontal="true"
-                                android:layout_marginTop="12dp"
-                                android:fontFamily="@font/nanumbarungothicbold_normal"
-                                android:text="프라임 마트"
-                                android:textColor="#F7F7F7"
-                                android:textSize="19dp" />
-
-                            <TextView
-                                android:id="@+id/upload_gps_store_address"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/upload_gps_store_name"
-                                android:layout_centerHorizontal="true"
-                                android:fontFamily="@font/nanumbarungothiclight_normal"
-                                android:text="서울특별시 용산구 청파로 47길 49"
-                                android:textColor="#F7F7F7"
-                                android:textSize="14dp" />
-
-                            <!--가게 번호-->
-                            <RelativeLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/upload_gps_store_address"
-                                android:layout_centerHorizontal="true"
-                                android:layout_marginTop="22dp"
-                                android:layout_marginBottom="6dp">
-
-                                <TextView
-                                    android:id="@+id/store_num_tel_fix"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/nanumbarungothiclight_normal"
-                                    android:text="T."
-                                    android:textColor="#F7F7F7"
-                                    android:textSize="14dp" />
-
-                                <!--번호-->
-                                <TextView
-                                    android:id="@+id/detail_act_store_contact"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerInParent="true"
-                                    android:layout_marginLeft="3dp"
-                                    android:layout_toRightOf="@id/store_num_tel_fix"
-                                    android:fontFamily="@font/nanumbarungothiclight_normal"
-                                    android:text="02-2662-9826"
-                                    android:textColor="#F7F7F7"
-                                    android:textSize="14dp" />
-
-                            </RelativeLayout>
-
-                        </RelativeLayout>
-
-                    </RelativeLayout>
-
-                </RelativeLayout>
-
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="36dp"
-                    android:layout_marginBottom="26dp">
+                    android:layout_marginVertical="30dp">
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
@@ -506,8 +415,7 @@
                         <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:layout_marginTop="20dp">
+                            android:layout_centerInParent="true">
 
                             <TextView
                                 android:id="@+id/products_price_quantity_fix"
