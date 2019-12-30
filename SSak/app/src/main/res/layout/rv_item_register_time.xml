@@ -26,7 +26,6 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/rv_item_register_time_day"
-                android:background="transparant"
                 android:fontFamily="@font/nanumbarungothic_normal"
                 android:textSize="22dp"
                 android:text="오전 8시" />
@@ -48,7 +47,6 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/rv_item_time_fix"
-                android:background="transparant"
                 android:fontFamily="@font/nanumbarungothic_normal"
                 android:textSize="22dp"
                 android:text="오후 9시" />
