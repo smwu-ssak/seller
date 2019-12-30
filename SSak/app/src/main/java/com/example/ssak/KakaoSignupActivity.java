@@ -26,7 +26,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 // Customized by SY
 
@@ -104,7 +103,7 @@ public class KakaoSignupActivity extends Activity {
     }
 
     private void registerUser() {
-        startActivity(new Intent(this, RegisterProfile.class));
+        startActivity(new Intent(this, RegisterProfileActivity.class));
         finish();
     }
 
