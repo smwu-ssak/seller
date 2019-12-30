@@ -26,7 +26,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 // Customized by SY
 
@@ -84,12 +83,15 @@ public class KakaoSignupActivity extends Activity {
         call.enqueue(new Callback<PostLoginResponse>() {
             @Override
             public void onResponse(Call<PostLoginResponse> call, Response<PostLoginResponse> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     String id = response.body().data.token;
                     Log.d("카카오 id", id);
-                    SharedPreferenceController.setMyId(getApplicationContext(), id);
-                    // Log.d("카카오 아이디", SharedPreferenceController.getMyId(getApplicationContext()));
-                    redirectMainActivity();
+                    if (id == SharedPreferenceController.getMyId(getApplicationContext()))
+                        redirectMainActivity();
+                    else {
+                        SharedPreferenceController.setMyId(getApplicationContext(), id);
+                        registerUser();
+                    }
                 }
             }
             @Override
@@ -98,6 +100,11 @@ public class KakaoSignupActivity extends Activity {
                 redirectLoginActivity();
             }
         });
+    }
+
+    private void registerUser() {
+        startActivity(new Intent(this, RegisterProfileActivity.class));
+        finish();
     }
 
     private void redirectMainActivity() {
