@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.ssak.DB.SharedPreferenceController;
+import com.example.ssak.Get.GetAlreadySignedupUserResponse;
 import com.example.ssak.Network.ApplicationController;
 import com.example.ssak.Network.NetworkService;
 import com.example.ssak.Post.PostLoginResponse;
@@ -86,16 +87,41 @@ public class KakaoSignupActivity extends Activity {
                 if (response.isSuccessful()) {
                     String id = response.body().data.token;
                     Log.d("카카오 id", id);
-                    if (id == SharedPreferenceController.getMyId(getApplicationContext()))
-                        redirectMainActivity();
-                    else {
-                        SharedPreferenceController.setMyId(getApplicationContext(), id);
-                        registerUser();
+                    try {
+                        requestSignupToServer(id);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                 }
             }
             @Override
             public void onFailure(Call<PostLoginResponse> call, Throwable t) {
+                Log.e("로그인 통신 실패", t.toString());
+                redirectLoginActivity();
+            }
+        });
+    }
+
+    private void requestSignupToServer(final String token) throws JSONException {
+        Call<GetAlreadySignedupUserResponse> call = networkService.getAlreadySignedupUserResponse("application/json", token);
+        call.enqueue(new Callback<GetAlreadySignedupUserResponse>() {
+            @Override
+            public void onResponse(Call<GetAlreadySignedupUserResponse> call, Response<GetAlreadySignedupUserResponse> response) {
+                if (response.isSuccessful()) {
+                    int status = response.body().status;
+                    if (status == 406) {
+                        SharedPreferenceController.setMyId(getApplicationContext(), token);
+                        redirectMainActivity();
+                    }
+                    if (status == 200) {
+                        SharedPreferenceController.setMyId(getApplicationContext(), token);
+                        registerUser();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetAlreadySignedupUserResponse> call, Throwable t) {
                 Log.e("로그인 통신 실패", t.toString());
                 redirectLoginActivity();
             }

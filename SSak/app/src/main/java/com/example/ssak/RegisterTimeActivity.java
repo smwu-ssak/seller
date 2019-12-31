@@ -13,7 +13,9 @@ public class RegisterTimeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_time);
+
         goToPreviousPage();
+        goToNextPage();
     }
 
     public void goToPreviousPage() {
@@ -22,6 +24,18 @@ public class RegisterTimeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), RegisterLocationActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    public void goToNextPage() {
+        LinearLayout btn = findViewById(R.id.register_time_act_next_btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), RegisterNumberActivity.class);
                 startActivity(intent);
                 finish();
             }
