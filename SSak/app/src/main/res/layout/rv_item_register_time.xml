@@ -1,17 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--Customized by MS-->
+<!-- Customized by SY -->
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#ECECEC">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/rv_item_register_time_open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/nanumbarungothic_normal"
+            android:textSize="22dp"
+            android:text="휴무"
+            android:visibility="invisible"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginBottom="10dp">
+            android:gravity="center">
 
-<!--임시 이미지 수정해야 함!!!!!-->
+            <!--임시 이미지 수정해야 함!!!!!-->
             <ImageView
                 android:id="@+id/rv_item_register_time_day"
                 android:layout_width="wrap_content"
@@ -20,37 +35,40 @@
                 android:layout_marginRight="16dp"
                 android:src="@drawable/editprofile_edit" />
 
-            <Button
-                android:id="@+id/rv_item_register_time"
+            <TextView
+                android:id="@+id/rv_item_register_time_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/rv_item_register_time_day"
                 android:fontFamily="@font/nanumbarungothic_normal"
                 android:textSize="22dp"
-                android:text="오전 8시" />
+                android:text="시작 시간" />
 
             <TextView
                 android:id="@+id/rv_item_time_fix"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nanumbarungothic_normal"
-                android:layout_toRightOf="@id/rv_item_register_time"
+                android:layout_toRightOf="@id/rv_item_register_time_start"
                 android:text="-"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="2dp"
-                android:layout_marginLeft="2dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
                 android:textSize="22dp" />
 
-            <Button
+            <TextView
+                android:id="@+id/rv_item_register_time_end"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/rv_item_time_fix"
                 android:fontFamily="@font/nanumbarungothic_normal"
                 android:textSize="22dp"
-                android:text="오후 9시" />
+                android:text="마감 시간" />
 
         </RelativeLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>
