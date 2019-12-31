@@ -67,9 +67,9 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nanumbarungothiclight_normal"
                         android:gravity="center_horizontal"
-                        android:text="위치를 다시 설정할래요"
+                        android:text="이름과 사진을 다시 설정할래요"
                         android:textColor="#FFFFFF"
-                        android:textSize="14dp" />
+                        android:textSize="12dp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -113,7 +113,7 @@
                         android:gravity="center_horizontal"
                         android:text="이 위치가 맞아요"
                         android:textColor="#FFFFFF"
-                        android:textSize="14dp" />
+                        android:textSize="12dp" />
 
                     <TextView
                         android:layout_width="match_parent"
