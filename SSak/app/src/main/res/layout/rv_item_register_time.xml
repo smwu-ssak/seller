@@ -11,52 +11,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/rv_item_register_time_day"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:src="@drawable/sellerregisteration_sunday" />
+
+        <TextView
+            android:id="@+id/rv_item_time_fix"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true">
-
-            <ImageView
-                android:id="@+id/rv_item_register_time_day"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="16dp"
-                android:src="@drawable/sellerregisteration_sunday" />
-
-            <TextView
-                android:id="@+id/rv_item_register_time_start"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/rv_item_register_time_day"
-                android:fontFamily="@font/nanumbarungothic_normal"
-                android:textSize="22dp"
-                android:text="시작 시간" />
-
-            <TextView
-                android:id="@+id/rv_item_time_fix"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/nanumbarungothic_normal"
-                android:layout_toRightOf="@id/rv_item_register_time_start"
-                android:text="-"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
-                android:textSize="22dp" />
-
-            <TextView
-                android:id="@+id/rv_item_register_time_end"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/rv_item_time_fix"
-                android:fontFamily="@font/nanumbarungothic_normal"
-                android:textSize="22dp"
-                android:text="마감 시간" />
-
-        </RelativeLayout>
+            android:fontFamily="@font/nanumbarungothic_normal"
+            android:text="-"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="22dp" />
 
         <TextView
             android:id="@+id/rv_item_register_time_open"
@@ -66,6 +38,26 @@
             android:fontFamily="@font/nanumbarungothic_normal"
             android:textSize="22dp"
             android:text="휴무"/>
+
+        <TextView
+            android:id="@+id/rv_item_register_time_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/rv_item_time_fix"
+            android:fontFamily="@font/nanumbarungothic_normal"
+            android:textSize="22dp"
+            android:text="시작 시간" />
+
+        <TextView
+            android:id="@+id/rv_item_register_time_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/rv_item_time_fix"
+            android:fontFamily="@font/nanumbarungothic_normal"
+            android:textSize="22dp"
+            android:text="마감 시간" />
 
     </RelativeLayout>
 
