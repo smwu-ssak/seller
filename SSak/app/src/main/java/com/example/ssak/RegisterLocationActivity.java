@@ -5,17 +5,50 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
+// Customized by SY
+
 public class RegisterLocationActivity extends AppCompatActivity {
+
+    static final int SEARCH_ADDRESS_ACTIVITY = 200;
+    private EditText address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_location);
 
+        searchAddress();
         goToPreviousPage();
         goToNextPage();
+    }
+
+    public void searchAddress() {
+        address = findViewById(R.id.register_location_act_address_et);
+        Button btn = findViewById(R.id.register_location_act_search_btn);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RegisterLocationActivity.this, RegisterLocationWebViewActivity.class);
+                startActivityForResult(intent, SEARCH_ADDRESS_ACTIVITY);
+            }
+        });
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+
+        if (requestCode == SEARCH_ADDRESS_ACTIVITY) {
+            if (resultCode == RESULT_OK) {
+                String data = intent.getExtras().getString("data");
+                if (data != null)
+                    address.setText(data);
+            }
+        }
     }
 
     public void goToPreviousPage() {
