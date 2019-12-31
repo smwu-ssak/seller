@@ -1,5 +1,6 @@
 package com.example.ssak.Network;
 
+import com.example.ssak.Get.GetAlreadySignedupUserResponse;
 import com.example.ssak.Get.GetKakaoProfileResponse;
 import com.example.ssak.Post.PostLoginResponse;
 import com.google.gson.JsonObject;
@@ -19,6 +20,13 @@ public interface NetworkService {
     Call<PostLoginResponse> postLoginResponse (
             @Header("Content-type") String content_type,
             @Body() JsonObject body
+    );
+
+    // 스토어 등록한 회원 조회
+    @GET("user")
+    Call<GetAlreadySignedupUserResponse> getAlreadySignedupUserResponse (
+            @Header("Content-type") String content_type,
+            @Header("token") String token
     );
 
     // 카카오톡 프로필 조회
