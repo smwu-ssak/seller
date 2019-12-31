@@ -1,10 +1,13 @@
 package com.example.ssak;
 
+import android.app.TimePickerDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.example.ssak.data.RegisterTimeData;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 // Customized by SY
 
@@ -45,7 +49,6 @@ public class RegisterTimeAdapter extends RecyclerView.Adapter<RegisterTimeAdapte
         viewHolder.registerTimeDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 while(true) {
                     if (item.getIsOpen()) {
                         item.setIsOpen(false);
@@ -65,6 +68,8 @@ public class RegisterTimeAdapter extends RecyclerView.Adapter<RegisterTimeAdapte
                         viewHolder.registerTimeEnd.setVisibility(View.INVISIBLE);
                         viewHolder.registerTimeLine.setVisibility(View.INVISIBLE);
                         viewHolder.registerTimeIsOpen.setVisibility(View.VISIBLE);
+                        item.setStartTime(null);
+                        item.setEndTime(null);
                         break;
                     }
                     else {
@@ -88,9 +93,47 @@ public class RegisterTimeAdapter extends RecyclerView.Adapter<RegisterTimeAdapte
                         break;
                     }
                 }
-
             }
         });
+
+        final Calendar start = Calendar.getInstance();
+        viewHolder.registerTimeStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hourOf, int minOf) {
+                        start.set(Calendar.HOUR_OF_DAY, hourOf);
+                        start.set(Calendar.MINUTE, minOf);
+
+                        viewHolder.registerTimeStart.setText(String.valueOf(start.getTime()).substring(11, 16));
+                        item.setStartTime(String.valueOf(start.getTime()).substring(11, 16)+":00");
+                        Log.d("시간", String.valueOf(start.getTime()).substring(11, 16)+":00");
+                    }
+                };
+                new TimePickerDialog(view.getRootView().getContext(), onTimeSetListener, start.get(Calendar.HOUR_OF_DAY), start.get(Calendar.MINUTE), true).show();
+            }
+        });
+
+        final Calendar end = Calendar.getInstance();
+        viewHolder.registerTimeEnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hourOf, int minOf) {
+                        end.set(Calendar.HOUR_OF_DAY, hourOf);
+                        end.set(Calendar.MINUTE, minOf);
+
+                        viewHolder.registerTimeEnd.setText(String.valueOf(end.getTime()).substring(11, 16));
+                        item.setEndTime(String.valueOf(end.getTime()).substring(11, 16)+":00");
+                        Log.d("시간", String.valueOf(end.getTime()).substring(11, 16)+":00");
+                    }
+                };
+                new TimePickerDialog(view.getRootView().getContext(), onTimeSetListener, end.get(Calendar.HOUR_OF_DAY), end.get(Calendar.MINUTE), true).show();
+            }
+        });
+
     }
 
     @Override
