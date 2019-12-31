@@ -55,6 +55,7 @@ public class RegisterProfileActivity extends AppCompatActivity {
         uploadImage();
 
         goToLoginActivity();
+        goToNextPage();
     }
 
     public void requestKakaoProfileDataToServer(String token) {
@@ -122,6 +123,18 @@ public class RegisterProfileActivity extends AppCompatActivity {
         }
     }
 
+    public void goToNextPage() {
+        RelativeLayout btn = findViewById(R.id.register_profile_act_bottom_btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), RegisterLocationActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
     public void goToLoginActivity() {
         RelativeLayout btn = findViewById(R.id.register_profile_act_back_btn);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -130,6 +143,7 @@ public class RegisterProfileActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 clearMyId(getApplicationContext());
                 startActivity(intent);
+                finish();
             }
         });
     }
