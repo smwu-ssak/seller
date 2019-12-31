@@ -35,12 +35,62 @@ public class RegisterTimeAdapter extends RecyclerView.Adapter<RegisterTimeAdapte
         final RegisterTimeData item = items.get(position);
 
         Glide.with(viewHolder.itemView.getContext())
-                .load(item.image)
+                .load(item.getImage())
                 .into(viewHolder.registerTimeDay);
-        viewHolder.registerTimeStart.setText(item.startTime);
-        viewHolder.registerTimeEnd.setText(item.endTime);
+        viewHolder.registerTimeStart.setText(item.getStartTime());
+        viewHolder.registerTimeEnd.setText(item.getEndTime());
         viewHolder.registerTimeLine.setVisibility(View.VISIBLE);
         viewHolder.registerTimeIsOpen.setVisibility(View.INVISIBLE);
+
+        viewHolder.registerTimeDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                while(true) {
+                    if (item.getIsOpen()) {
+                        item.setIsOpen(false);
+                        switch (item.getDay()) {
+                            case 0: item.setImage(R.drawable.sellerregisteration_sundayoff); break;
+                            case 1: item.setImage(R.drawable.sellerregisteration_mondayoff); break;
+                            case 2: item.setImage(R.drawable.sellerregisteration_tuesdayoff); break;
+                            case 3: item.setImage(R.drawable.sellerregisteration_wednesdayoff); break;
+                            case 4: item.setImage(R.drawable.sellerregisteration_thursdayoff); break;
+                            case 5: item.setImage(R.drawable.sellerregisteration_fridayoff); break;
+                            case 6: item.setImage(R.drawable.sellerregisteration_saturdayoff); break;
+                        }
+                        Glide.with(viewHolder.itemView.getContext())
+                                .load(item.getImage())
+                                .into(viewHolder.registerTimeDay);
+                        viewHolder.registerTimeStart.setVisibility(View.INVISIBLE);
+                        viewHolder.registerTimeEnd.setVisibility(View.INVISIBLE);
+                        viewHolder.registerTimeLine.setVisibility(View.INVISIBLE);
+                        viewHolder.registerTimeIsOpen.setVisibility(View.VISIBLE);
+                        break;
+                    }
+                    else {
+                        item.setIsOpen(true);
+                        switch (item.getDay()) {
+                            case 0: item.setImage(R.drawable.sellerregisteration_sunday); break;
+                            case 1: item.setImage(R.drawable.sellerregisteration_monday); break;
+                            case 2: item.setImage(R.drawable.sellerregisteration_tuesday); break;
+                            case 3: item.setImage(R.drawable.sellerregisteration_wednesday); break;
+                            case 4: item.setImage(R.drawable.sellerregisteration_thursday); break;
+                            case 5: item.setImage(R.drawable.sellerregisteration_friday); break;
+                            case 6: item.setImage(R.drawable.sellerregisteration_saturday); break;
+                        }
+                        Glide.with(viewHolder.itemView.getContext())
+                                .load(item.getImage())
+                                .into(viewHolder.registerTimeDay);
+                        viewHolder.registerTimeStart.setVisibility(View.VISIBLE);
+                        viewHolder.registerTimeEnd.setVisibility(View.VISIBLE);
+                        viewHolder.registerTimeLine.setVisibility(View.VISIBLE);
+                        viewHolder.registerTimeIsOpen.setVisibility(View.INVISIBLE);
+                        break;
+                    }
+                }
+
+            }
+        });
     }
 
     @Override
