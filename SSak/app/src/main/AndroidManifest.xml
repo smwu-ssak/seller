@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RegisterTimeActivity"/>
+        <activity android:name=".RegisterNumberActivity"></activity>
+        <activity android:name=".RegisterTimeActivity" />
         <activity android:name=".RegisterLocationActivity" />
         <activity android:name=".RegisterProfileActivity" />
         <activity android:name=".UploadProductActivity" />
