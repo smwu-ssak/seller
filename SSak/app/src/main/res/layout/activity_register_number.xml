@@ -157,7 +157,7 @@
 
             <!--기입 텍스트-->
             <EditText
-                android:id="@+id/register_profile_act_store_name"
+                android:id="@+id/register_number_act_store_tel_et"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/number_text_fix"

@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import static com.example.ssak.RegisterProfileActivity.storeData;
+
 // Customized by SY
 
 public class RegisterLocationActivity extends AppCompatActivity {
@@ -68,6 +70,11 @@ public class RegisterLocationActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                storeData.setAddress(String.valueOf(address.getText()));
+                // 위도, 경도 수정
+                storeData.setLat((float)37.544163);
+                storeData.setLog((float)126.965948);
+                // 위도, 경도 수정
                 Intent intent = new Intent(getApplicationContext(), RegisterTimeActivity.class);
                 startActivity(intent);
                 finish();
