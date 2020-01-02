@@ -4,10 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import static com.example.ssak.RegisterProfileActivity.storeData;
+
+// Customized by SY
+
 public class RegisterNumberActivity extends AppCompatActivity {
+
+    EditText telNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +43,10 @@ public class RegisterNumberActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                telNum = findViewById(R.id.register_number_act_store_tel_et);
+                storeData.setTel(String.valueOf(telNum.getText()));
+                Log.d("data", String.valueOf(storeData));
+
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 finish();

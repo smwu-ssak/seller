@@ -19,6 +19,7 @@ import com.example.ssak.DB.SharedPreferenceController;
 import com.example.ssak.Get.GetKakaoProfileResponse;
 import com.example.ssak.Network.ApplicationController;
 import com.example.ssak.Network.NetworkService;
+import com.example.ssak.data.StoreData;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -38,6 +39,8 @@ public class RegisterProfileActivity extends AppCompatActivity {
 
     ApplicationController applicationController = new ApplicationController();
     NetworkService networkService = applicationController.buildNetworkService();
+
+    public static StoreData storeData = new StoreData();
 
     de.hdodenhof.circleimageview.CircleImageView targetIv;
     EditText targetTv;
@@ -128,6 +131,9 @@ public class RegisterProfileActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String name = String.valueOf(targetTv.getText());
+                Log.d("name", name);
+                storeData.setName(name);
                 Intent intent = new Intent(getApplicationContext(), RegisterLocationActivity.class);
                 startActivity(intent);
                 finish();

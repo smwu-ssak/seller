@@ -10,12 +10,17 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.ssak.data.RegisterTimeData;
+import com.example.ssak.data.StoreOperatingTimeData;
+import static com.example.ssak.RegisterProfileActivity.storeData;
 
 import java.util.ArrayList;
 
 // Customized by SY
 
 public class RegisterTimeActivity extends AppCompatActivity {
+
+    ArrayList<StoreOperatingTimeData> time = new ArrayList<>();
+    ArrayList<RegisterTimeData> data = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +36,6 @@ public class RegisterTimeActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.rv_register_time);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        ArrayList<RegisterTimeData> data = new ArrayList<>();
         RegisterTimeAdapter adapter = new RegisterTimeAdapter(data);
 
         recyclerView.setAdapter(adapter);
@@ -64,6 +68,13 @@ public class RegisterTimeActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                for (int i=0; i<data.size(); i++) {
+                    if (data.get(i).getDay() == 0)
+                        time.add(0, new StoreOperatingTimeData(data.get(i).getDay(), data.get(i).getStartTime(), data.get(i).getEndTime()));
+                    else
+                        time.add(new StoreOperatingTimeData(data.get(i).getDay(), data.get(i).getStartTime(), data.get(i).getEndTime()));
+                }
+                storeData.setTime(time);
                 Intent intent = new Intent(getApplicationContext(), RegisterNumberActivity.class);
                 startActivity(intent);
                 finish();

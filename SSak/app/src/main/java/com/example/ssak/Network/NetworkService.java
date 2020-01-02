@@ -3,6 +3,7 @@ package com.example.ssak.Network;
 import com.example.ssak.Get.GetAlreadySignedupUserResponse;
 import com.example.ssak.Get.GetKakaoProfileResponse;
 import com.example.ssak.Post.PostLoginResponse;
+import com.example.ssak.Post.PostRegisterStoreRequest;
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
@@ -34,6 +35,14 @@ public interface NetworkService {
     Call<GetKakaoProfileResponse> getKakaoProfileResponse (
             @Header("Content-type") String content_type,
             @Header("token") String token
+    );
+
+    // 스토어 등록
+    @POST("store")
+    Call<PostRegisterStoreRequest> postRegisterStoreRequest (
+            @Header("Content-type") String content_type,
+            @Header("token") String token,
+            @Body() JsonObject body
     );
 
 }
