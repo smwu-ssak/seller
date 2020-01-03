@@ -1,22 +1,34 @@
 package com.example.ssak;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.example.ssak.data.MainProductData;
+
+import java.util.ArrayList;
 
 // Customized by SY
 
 public class MainActivity extends AppCompatActivity {
 
+    static ArrayList<MainProductData> data = new ArrayList();
+    static MainProductAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         uploadProducts();
+        connectAdapter();
     }
 
     public void uploadProducts() {
@@ -28,6 +40,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void connectAdapter() {
+        RecyclerView recyclerView = findViewById(R.id.rv_main_product);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        MainProductAdapter adapter = new MainProductAdapter(data);
+        recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new RecyclerViewDecoration(15));
+
+        data.add(new MainProductData(R.drawable.rv_main_apple, "사과", 20, 1000, 500));
+        data.add(new MainProductData(R.drawable.rv_main_broccoli, "브로콜리", 10, 2000, 1200));
     }
 
     private long time = 0;
@@ -43,3 +67,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
