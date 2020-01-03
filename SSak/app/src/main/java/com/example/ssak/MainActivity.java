@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.ssak.data.MainProductData;
@@ -27,8 +28,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        moveToMypage();
         uploadProducts();
         connectAdapter();
+    }
+
+
+    public void moveToMypage(){
+        RelativeLayout button = findViewById(R.id.main_act_topbar_mypage_btn);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MyPageActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void uploadProducts() {
