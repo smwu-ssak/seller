@@ -181,7 +181,7 @@
                         android:textColorHint="#C6C6C6"
                         android:textSize="22dp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/mypage_profile_act_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -190,8 +190,7 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="16dp"
                         android:fontFamily="@font/nanumbarungothicbold_normal"
-                        android:hint="영업 시간을 입력하세요"
-
+                        android:text="영업 시간 변경하기"
                         android:textColor="#3A3A3A"
                         android:textColorHint="#C6C6C6"
                         android:textSize="22dp" />
