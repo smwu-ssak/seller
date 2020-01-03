@@ -4,9 +4,9 @@ package com.example.ssak.data;
 
 public class StoreOperatingTimeData {
 
-    private int day;
-    private String startTime;
-    private String endTime;
+    public int day;
+    public String startTime;
+    public String endTime;
 
     public StoreOperatingTimeData(int day, String startTime, String endTime) {
         this.day = day;

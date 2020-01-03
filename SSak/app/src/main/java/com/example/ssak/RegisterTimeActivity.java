@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 
 public class RegisterTimeActivity extends AppCompatActivity {
 
-    ArrayList<StoreOperatingTimeData> time = new ArrayList<>();
+    StoreOperatingTimeData time[] = new StoreOperatingTimeData[7];
     ArrayList<RegisterTimeData> data = new ArrayList<>();
 
     @Override
@@ -70,11 +71,13 @@ public class RegisterTimeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 for (int i=0; i<data.size(); i++) {
                     if (data.get(i).getDay() == 0)
-                        time.add(0, new StoreOperatingTimeData(data.get(i).getDay(), data.get(i).getStartTime(), data.get(i).getEndTime()));
+                        time[0] = new StoreOperatingTimeData(data.get(i).getDay(), data.get(i).getStartTime(), data.get(i).getEndTime());
                     else
-                        time.add(new StoreOperatingTimeData(data.get(i).getDay(), data.get(i).getStartTime(), data.get(i).getEndTime()));
+                        time[i+1] = new StoreOperatingTimeData(data.get(i).getDay(), data.get(i).getStartTime(), data.get(i).getEndTime());
                 }
                 storeData.setTime(time);
+//                for (int i=0; i<storeData.getStoreOperatingTimeData().size(); i++)
+//                    Log.d("time", String.valueOf(storeData.getStoreOperatingTimeData().get(i).day));
                 Intent intent = new Intent(getApplicationContext(), RegisterNumberActivity.class);
                 startActivity(intent);
                 finish();

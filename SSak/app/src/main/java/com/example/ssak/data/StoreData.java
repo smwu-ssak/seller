@@ -1,7 +1,5 @@
 package com.example.ssak.data;
 
-import java.util.ArrayList;
-
 // Customized by SY
 
 public class StoreData {
@@ -11,7 +9,7 @@ public class StoreData {
     private float lat;
     private float log;
     private String tel;
-    private ArrayList<StoreOperatingTimeData> time;
+    private StoreOperatingTimeData time[];
 
     public String getName() { return name; }
 
@@ -23,7 +21,7 @@ public class StoreData {
 
     public String getTel() { return tel; }
 
-    public ArrayList<StoreOperatingTimeData> getStoreOperatingTimeData() { return time; }
+    public StoreOperatingTimeData[] getStoreOperatingTimeData() { return time; }
 
     public void setName(String name) { this.name = name; }
 
@@ -35,6 +33,6 @@ public class StoreData {
 
     public void setTel(String tel) { this.tel = tel; }
 
-    public void setTime(ArrayList<StoreOperatingTimeData> time) { this.time = time; }
+    public void setTime(StoreOperatingTimeData[] time) { this.time = time; }
 
 }
