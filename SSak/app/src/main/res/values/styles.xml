@@ -12,4 +12,16 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--민승-->
+    <!--싹 컬러-->
+    <style name="ssakTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorAccent">#46AE7F</item>
+        <item name="colorControlNormal">#C6C6C6</item>
+        <item name="android:alertDialogTheme">@style/ssakDialogTheme</item>
+    </style>
+
+    <style name="ssakDialogTheme" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:background">#46AE7F</item>
+    </style>
+
 </resources>
