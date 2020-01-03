@@ -105,9 +105,38 @@ public class UploadProductActivity extends AppCompatActivity {
                         calendar.set(Calendar.MONTH, month);
                         calendar.set(Calendar.DAY_OF_MONTH, dayOf);
 
+                        String dateM = String.valueOf(calendar.getTime()).substring(4,7);
+                        String monthM = new String();
+
+                        switch(dateM) {
+                            case "Jan" : monthM = "01";  break;
+                            case "Feb" : monthM = "02";  break;
+                            case "Mar" : monthM = "03";  break;
+                            case "Apr" : monthM = "04";  break;
+                            case "May" : monthM = "05";  break;
+                            case "Jun" : monthM = "06";  break;
+                            case "Jul" : monthM = "07";  break;
+                            case "Aug" : monthM = "08";  break;
+                            case "Sep" : monthM = "09";  break;
+                            case "Oct" : monthM = "10";  break;
+                            case "Nov" : monthM = "11";  break;
+                            case "Dec" : monthM = "12";  break;
+                        }
+
+
+                        String string = String.valueOf(calendar.getTime()).substring(30,34)+"/"+monthM+"/"+String.valueOf(calendar.getTime()).substring(8,10);
+                        dateleft.setText(string);
+                        Log.d("날짜", String.valueOf(calendar.getTime()).substring(8,10));
+                        Log.d("날짜", String.valueOf(calendar.getTime()).substring(4,7));
+                        Log.d("날짜", String.valueOf(calendar.getTime()).substring(30,34));
+                        dateleft.setTextColor(Color.parseColor("#3A3A3A"));
+
+                        /*
                         SimpleDateFormat simpleD = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
                         dateleft.setText(simpleD.format(calendar.getTime()));
                         dateleft.setTextColor(Color.parseColor("#3A3A3A"));
+
+                         */
                     }
                 };
                 new DatePickerDialog(view.getRootView().getContext(), onDateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
@@ -128,16 +157,12 @@ public class UploadProductActivity extends AppCompatActivity {
                         calendar.set(Calendar.HOUR_OF_DAY, hourOf);
                         calendar.set(Calendar.MINUTE, minOf);
 
-                        //초단위까지
-                        SimpleDateFormat simpleTS = new SimpleDateFormat("HH:mm:ss.SSS", Locale.getDefault());
-
-                        //분단위까지
-                        SimpleDateFormat simpleT = new SimpleDateFormat("HH:mm", Locale.getDefault());
-                        timeleft.setText(simpleT.format(calendar.getTime()));
+                        timeleft.setText(String.valueOf(calendar.getTime()).substring(11, 16));
+                        Log.d("시간", String.valueOf(calendar.getTime()).substring(11, 16)+":00");
                         timeleft.setTextColor(Color.parseColor("#3A3A3A"));
                     }
                 };
-                new TimePickerDialog(view.getRootView().getContext(), onTimeSetListener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
+                new TimePickerDialog(view.getRootView().getContext(), onTimeSetListener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show();
 
             }
         });
