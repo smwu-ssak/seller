@@ -22,6 +22,7 @@ import com.example.ssak.data.MainProductData;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
     static ArrayList<MainProductData> data = new ArrayList();
     static MainProductAdapter adapter;
 
+    private RelativeLayout relativeLayout;
+    private CircleImageView circleImageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,8 +49,13 @@ public class MainActivity extends AppCompatActivity {
         moveToMypage();
         uploadProducts();
         connectAdapter();
+        UptoLayout();
     }
 
+    public void UptoLayout() {
+        circleImageView = findViewById(R.id.product_upload);
+        circleImageView.bringToFront();
+    }
 
     public void moveToMypage(){
         RelativeLayout button = findViewById(R.id.main_act_topbar_mypage_btn);
