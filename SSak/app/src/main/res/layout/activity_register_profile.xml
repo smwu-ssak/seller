@@ -176,8 +176,9 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/nanumbarungothicbold_normal"
-                android:maxLength="20"
+                android:gravity="center"
                 android:hint="가게 이름"
+                android:maxLength="20"
                 android:textColor="#6E6E6E"
                 android:textSize="20dp" />
 

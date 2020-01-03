@@ -57,16 +57,16 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#00ff0000"
-                        android:fontFamily="@font/nanumbarungothicbold_normal"
-                        android:gravity="center"
-                        android:stateListAnimator="@null"
-                        android:text="이전 단계"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#00ff0000"
+                    android:fontFamily="@font/nanumbarungothicbold_normal"
+                    android:gravity="center"
+                    android:stateListAnimator="@null"
+                    android:text="이전 단계"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24dp" />
 
             </LinearLayout>
 
@@ -83,16 +83,16 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#00ff0000"
-                        android:fontFamily="@font/nanumbarungothicbold_normal"
-                        android:gravity="center"
-                        android:stateListAnimator="@null"
-                        android:text="등록 완료"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#00ff0000"
+                    android:fontFamily="@font/nanumbarungothicbold_normal"
+                    android:gravity="center"
+                    android:stateListAnimator="@null"
+                    android:text="등록 완료"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24dp" />
 
             </LinearLayout>
 
@@ -161,13 +161,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/number_text_fix"
-                android:inputType="number"
-                android:digits="0123456789-"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="60dp"
+                android:digits="0123456789-"
                 android:fontFamily="@font/nanumbarungothicbold_normal"
-                android:maxLength="20"
+                android:gravity="center"
                 android:hint="00-000-0000"
+                android:inputType="number"
+                android:maxLength="20"
                 android:textColor="#6E6E6E"
                 android:textSize="20dp" />
 

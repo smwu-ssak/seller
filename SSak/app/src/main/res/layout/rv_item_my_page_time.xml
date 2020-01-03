@@ -17,19 +17,19 @@
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/rv_item_mypage_time_start"
             android:layout_marginRight="18dp"
+            android:layout_toLeftOf="@+id/rv_item_mypage_time_start"
             android:src="@drawable/sellerregisteration_sunday" />
 
         <TextView
             android:id="@+id/rv_item_time_fix"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:fontFamily="@font/nanumbarungothic_normal"
             android:text="-"
-            android:layout_centerInParent="true"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
             android:textSize="22dp" />
 
         <TextView
@@ -38,8 +38,8 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fontFamily="@font/nanumbarungothic_normal"
-            android:textSize="22dp"
-            android:text="휴무"/>
+            android:text="휴무"
+            android:textSize="22dp" />
 
         <TextView
             android:id="@+id/rv_item_mypage_time_start"
@@ -48,8 +48,8 @@
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/rv_item_time_fix"
             android:fontFamily="@font/nanumbarungothic_normal"
-            android:textSize="22dp"
-            android:text="시작 시간" />
+            android:text="시작 시간"
+            android:textSize="22dp" />
 
         <TextView
             android:id="@+id/rv_item_mypage_time_end"
@@ -58,8 +58,8 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/rv_item_time_fix"
             android:fontFamily="@font/nanumbarungothic_normal"
-            android:textSize="22dp"
-            android:text="마감 시간" />
+            android:text="마감 시간"
+            android:textSize="22dp" />
 
     </RelativeLayout>
 

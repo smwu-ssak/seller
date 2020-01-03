@@ -198,6 +198,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/location_text_fix"
                 android:layout_marginVertical="20dp"
+                android:gravity="center"
                 android:fontFamily="@font/nanumbarungothic_normal"
                 android:textSize="16dp"
                 android:hint="주소를 입력해주세요."/>
