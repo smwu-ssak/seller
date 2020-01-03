@@ -15,7 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RegisterLocationWebViewActivity"></activity>
+        <activity android:name=".MyPageProfileActivity"></activity>
+        <activity android:name=".MyPageActivity" />
+        <activity android:name=".RegisterLocationWebViewActivity" />
         <activity android:name=".RegisterNumberActivity" />
         <activity android:name=".RegisterTimeActivity" />
         <activity android:name=".RegisterLocationActivity" />
