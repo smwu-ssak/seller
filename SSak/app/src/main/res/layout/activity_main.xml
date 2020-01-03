@@ -85,6 +85,7 @@
                 android:layout_marginBottom="18dp">
 
                 <TextView
+                    android:id="@+id/main_act_seller_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nanumbarungothicbold_normal"

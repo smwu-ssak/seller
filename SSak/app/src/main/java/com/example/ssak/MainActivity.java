@@ -10,15 +10,28 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.example.ssak.DB.SharedPreferenceController;
+import com.example.ssak.Get.GetKakaoProfileResponse;
+import com.example.ssak.Network.ApplicationController;
+import com.example.ssak.Network.NetworkService;
 import com.example.ssak.data.MainProductData;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 // Customized by SY
 
 public class MainActivity extends AppCompatActivity {
+
+    ApplicationController applicationController = new ApplicationController();
+    NetworkService networkService = applicationController.buildNetworkService();
 
     static ArrayList<MainProductData> data = new ArrayList();
     static MainProductAdapter adapter;
@@ -28,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        requestKakaoProfileDataToServer();
         moveToMypage();
         uploadProducts();
         connectAdapter();
@@ -79,6 +93,32 @@ public class MainActivity extends AppCompatActivity {
         } else if (System.currentTimeMillis() < 2000 + time) {
             finish();
         }
+    }
+
+    public void requestKakaoProfileDataToServer() {
+        Call<GetKakaoProfileResponse> call = networkService.getKakaoProfileResponse("application/json", SharedPreferenceController.getMyId(getApplicationContext()));
+        call.enqueue(new Callback<GetKakaoProfileResponse>() {
+            @Override
+            public void onResponse(Call<GetKakaoProfileResponse> call, Response<GetKakaoProfileResponse> response) {
+                if (response.isSuccessful()) {
+                    String imgUrl = response.body().data.userProfile;
+                    String name = response.body().data.userName;
+
+                    ImageView imageView = findViewById(R.id.main_act_seller_img);
+                    Glide.with(getApplicationContext())
+                            .load(imgUrl)
+                            .into(imageView);
+                    TextView textView = findViewById(R.id.main_act_seller_name);
+                    textView.setText(name);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetKakaoProfileResponse> call, Throwable t) {
+
+            }
+        });
+
     }
 }
 
