@@ -7,6 +7,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -80,6 +81,7 @@ public class UploadProductActivity extends AppCompatActivity {
         }
     }
 
+    //Customized by 민승
     public void goToMainActivity() {
         RelativeLayout btn = findViewById(R.id.upload_act_back_btn);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -105,6 +107,7 @@ public class UploadProductActivity extends AppCompatActivity {
 
                         SimpleDateFormat simpleD = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
                         dateleft.setText(simpleD.format(calendar.getTime()));
+                        dateleft.setTextColor(Color.parseColor("#3A3A3A"));
                     }
                 };
                 new DatePickerDialog(view.getRootView().getContext(), onDateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
@@ -131,6 +134,7 @@ public class UploadProductActivity extends AppCompatActivity {
                         //분단위까지
                         SimpleDateFormat simpleT = new SimpleDateFormat("HH:mm", Locale.getDefault());
                         timeleft.setText(simpleT.format(calendar.getTime()));
+                        timeleft.setTextColor(Color.parseColor("#3A3A3A"));
                     }
                 };
                 new TimePickerDialog(view.getRootView().getContext(), onTimeSetListener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
@@ -138,7 +142,6 @@ public class UploadProductActivity extends AppCompatActivity {
             }
         });
     }
-
 
 
 }
