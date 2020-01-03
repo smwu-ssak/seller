@@ -292,12 +292,13 @@
 
                         <!--날짜-->
                         <RelativeLayout
-                            android:id="@+id/upload_products_timeleft_fix"
+                            android:id="@+id/upload_products_dateleft_fix"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center">
 
                             <TextView
+                                android:id="@+id/upload_products_act_dateleft"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/nanumbarungothicbold_normal"
@@ -319,13 +320,13 @@
 
                         <!--날짜-->
                         <RelativeLayout
-                            android:id="@+id/upload_products_timeleft_fix_2"
+                            android:id="@+id/upload_products_timeleft_fix"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center">
 
                             <TextView
-                                android:id="@+id/upload_products_timeleft"
+                                android:id="@+id/upload_products_act_timeleft"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/nanumbarungothicbold_normal"
