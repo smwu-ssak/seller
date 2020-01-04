@@ -1,7 +1,6 @@
 package com.example.ssak.Network;
 
 import android.app.Application;
-import android.os.Bundle;
 import android.util.Log;
 
 import com.example.ssak.KakaoSDKAdapter;
@@ -17,6 +16,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApplicationController extends Application {
 
     private String baseUrl = "http://52.79.193.54:3000/";
+    private String kakaoUrl = "https://dapi.kakao.com/v2/local/search/";
+
     private static ApplicationController instance;
     private static ApplicationController getInstance() { return instance; }
     private NetworkService networkService;
@@ -26,10 +27,9 @@ public class ApplicationController extends Application {
         super.onCreate();
         ApplicationController.instance = this;
         KakaoSDK.init(new KakaoSDKAdapter());
-        buildNetworkService();
     }
 
-    public NetworkService buildNetworkService() {
+    public NetworkService buildNetworkService(String baseUrl) {
         synchronized (ApplicationController.class) {
             Gson gson = new GsonBuilder()
                     .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")

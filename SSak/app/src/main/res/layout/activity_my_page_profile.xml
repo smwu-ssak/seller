@@ -118,13 +118,13 @@
 
                 </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/mypage_profile_act_store_name"
+                <EditText
+                    android:id="@+id/mypage_profile_act_store_name_et"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/nanumbarungothicbold_normal"
-                    android:text="럭키 슈퍼렛"
+                    android:hint="가게 상호"
                     android:textColor="#3A3A3A"
                     android:textSize="20dp" />
 

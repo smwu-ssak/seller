@@ -32,7 +32,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     ApplicationController applicationController = new ApplicationController();
-    NetworkService networkService = applicationController.buildNetworkService();
+    NetworkService networkService = applicationController.buildNetworkService("http://52.79.193.54:3000/");
 
     static ArrayList<MainProductData> data = new ArrayList();
     static MainProductAdapter adapter;

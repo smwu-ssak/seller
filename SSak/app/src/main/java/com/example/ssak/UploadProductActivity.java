@@ -49,7 +49,7 @@ import retrofit2.Response;
 public class UploadProductActivity extends AppCompatActivity {
 
     ApplicationController applicationController = new ApplicationController();
-    NetworkService networkService = applicationController.buildNetworkService();
+    NetworkService networkService = applicationController.buildNetworkService("http://52.79.193.54:3000/");
 
     private static final int REQUEST_CODE = 200;
     private ImageView imageView;

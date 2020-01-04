@@ -3,6 +3,7 @@ package com.example.ssak.Network;
 import com.example.ssak.Get.GetAlreadySignedupUserResponse;
 import com.example.ssak.Get.GetKakaoProfileResponse;
 import com.example.ssak.Get.GetMainResponse;
+import com.example.ssak.Get.GetStoreAddressResponse;
 import com.example.ssak.Get.GetStoreInformationResponse;
 import com.example.ssak.Patch.PatchKakaoProfileRequest;
 import com.example.ssak.Patch.PatchStoreInformationRequest;
@@ -21,6 +22,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 public interface NetworkService {
 
@@ -106,6 +108,13 @@ public interface NetworkService {
             @Header("Content-type") String content_type,
             @Header("token") String token,
             @Body() JsonObject body
+    );
+
+    // 주소로 위도와 경도 추출
+    @GET("address.json")
+    Call<GetStoreAddressResponse> getStoreAddressResponse (
+            @Header("Authorization") String authorization,
+            @Query("query") String query
     );
 
 }
