@@ -46,8 +46,6 @@ public class RegisterLocationWebViewActivity extends AppCompatActivity {
                 browser.loadUrl("javascript:sample2_execDaumPostcode();");
             }
         });
-
-        browser.loadUrl("https://github.com/smwu-ssak/seller/tree/develop/SSak/app/src/main/assets/daum.html");
-        // browser.loadUrl("http://52.79.193.54:3000/daum.html");
+        browser.loadUrl("http://52.79.193.54:3000/");
     }
 }
