@@ -2,6 +2,7 @@ package com.example.ssak.Network;
 
 import com.example.ssak.Get.GetAlreadySignedupUserResponse;
 import com.example.ssak.Get.GetKakaoProfileResponse;
+import com.example.ssak.Get.GetMainResponse;
 import com.example.ssak.Patch.PatchKakaoProfileRequest;
 import com.example.ssak.Post.PostLoginResponse;
 import com.example.ssak.Post.PostRegisterStoreRequest;
@@ -73,6 +74,13 @@ public interface NetworkService {
             @Part("comment") RequestBody comment,
             @Part("salePrice") int salePrice,
             @Part("expDate") RequestBody expDate
+    );
+
+    // 메인 페이지
+    @GET("main/seller")
+    Call<GetMainResponse> getMainResponse (
+            @Header("Content-type") String content_type,
+            @Header("token") String token
     );
 
 }
