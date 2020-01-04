@@ -5,6 +5,7 @@ import com.example.ssak.Get.GetKakaoProfileResponse;
 import com.example.ssak.Get.GetMainResponse;
 import com.example.ssak.Get.GetStoreInformationResponse;
 import com.example.ssak.Patch.PatchKakaoProfileRequest;
+import com.example.ssak.Patch.PatchStoreNumberRequest;
 import com.example.ssak.Post.PostLoginResponse;
 import com.example.ssak.Post.PostRegisterStoreRequest;
 import com.example.ssak.Post.PostUploadProductRequest;
@@ -89,6 +90,14 @@ public interface NetworkService {
     Call<GetStoreInformationResponse> getStoreInformationResponse (
             @Header("Content-type") String content_type,
             @Header("token") String token
+    );
+
+    // 스토어 전화번호 수정
+    @PATCH("mypage/seller/tel")
+    Call<PatchStoreNumberRequest> patchStoreNumberRequest (
+            @Header("Content-type") String content_type,
+            @Header("token") String token,
+            @Body() JsonObject body
     );
 
 }

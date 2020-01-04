@@ -13,11 +13,10 @@ import android.widget.RelativeLayout;
 import com.example.ssak.DB.SharedPreferenceController;
 import com.example.ssak.Network.ApplicationController;
 import com.example.ssak.Network.NetworkService;
-import com.example.ssak.Post.PostRegisterStoreRequest;
+import com.example.ssak.Patch.PatchStoreNumberRequest;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,7 +24,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.example.ssak.RegisterProfileActivity.storeData;
+// Customized by SY
 
 public class MyPageNumActivity extends AppCompatActivity {
 
@@ -58,9 +57,37 @@ public class MyPageNumActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MyPageProfileActivity.class);
-                startActivity(intent);
-                finish();
+                EditText editText = findViewById(R.id.mypage_tel_act_store_tel_et);
+                String telNum = String.valueOf(editText.getText());
+
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("tel", telNum);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                JsonObject gsonObject = (JsonObject) new JsonParser().parse(jsonObject.toString());
+
+                Call<PatchStoreNumberRequest> call = networkService.patchStoreNumberRequest("application/json", SharedPreferenceController.getMyId(getApplicationContext()), gsonObject);
+                call.enqueue(new Callback<PatchStoreNumberRequest>() {
+                    @Override
+                    public void onResponse(Call<PatchStoreNumberRequest> call, Response<PatchStoreNumberRequest> response) {
+                        if (response.isSuccessful()) {
+                            int status = response.body().status;
+                            if (status == 200) {
+                                Intent intent = new Intent(getApplicationContext(), MyPageProfileActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<PatchStoreNumberRequest> call, Throwable t) {
+
+                    }
+                });
+
             }
         });
 
