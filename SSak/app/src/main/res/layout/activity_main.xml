@@ -104,7 +104,7 @@
                 android:layout_marginBottom="24dp"
                 android:orientation="horizontal">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/main_act_seller_img"
                     android:layout_width="125dp"
                     android:layout_height="125dp"

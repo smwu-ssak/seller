@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     static ArrayList<MainProductData> data = new ArrayList();
     static MainProductAdapter adapter;
 
-    private RelativeLayout relativeLayout;
     private CircleImageView circleImageView;
 
     @Override
@@ -55,6 +53,31 @@ public class MainActivity extends AppCompatActivity {
     public void UptoLayout() {
         circleImageView = findViewById(R.id.product_upload);
         circleImageView.bringToFront();
+    }
+
+    public void requestKakaoProfileDataToServer() {
+        Call<GetKakaoProfileResponse> call = networkService.getKakaoProfileResponse("application/json", SharedPreferenceController.getMyId(getApplicationContext()));
+        call.enqueue(new Callback<GetKakaoProfileResponse>() {
+            @Override
+            public void onResponse(Call<GetKakaoProfileResponse> call, Response<GetKakaoProfileResponse> response) {
+                if (response.isSuccessful()) {
+                    String imgUrl = response.body().data.userProfile;
+                    String name = response.body().data.userName;
+
+                    de.hdodenhof.circleimageview.CircleImageView imageView = findViewById(R.id.main_act_seller_img);
+                    Glide.with(getApplicationContext())
+                            .load(imgUrl)
+                            .into(imageView);
+                    TextView textView = findViewById(R.id.main_act_seller_name);
+                    textView.setText(name);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetKakaoProfileResponse> call, Throwable t) {
+
+            }
+        });
     }
 
     public void moveToMypage(){
@@ -83,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.rv_main_product);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        MainProductAdapter adapter = new MainProductAdapter(data);
+        adapter = new MainProductAdapter(data);
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new RecyclerViewDecoration(15));
 
@@ -104,30 +127,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void requestKakaoProfileDataToServer() {
-        Call<GetKakaoProfileResponse> call = networkService.getKakaoProfileResponse("application/json", SharedPreferenceController.getMyId(getApplicationContext()));
-        call.enqueue(new Callback<GetKakaoProfileResponse>() {
-            @Override
-            public void onResponse(Call<GetKakaoProfileResponse> call, Response<GetKakaoProfileResponse> response) {
-                if (response.isSuccessful()) {
-                    String imgUrl = response.body().data.userProfile;
-                    String name = response.body().data.userName;
-
-                    ImageView imageView = findViewById(R.id.main_act_seller_img);
-                    Glide.with(getApplicationContext())
-                            .load(imgUrl)
-                            .into(imageView);
-                    TextView textView = findViewById(R.id.main_act_seller_name);
-                    textView.setText(name);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<GetKakaoProfileResponse> call, Throwable t) {
-
-            }
-        });
-
-    }
 }
 
