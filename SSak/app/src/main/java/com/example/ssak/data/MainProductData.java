@@ -1,26 +1,19 @@
 package com.example.ssak.data;
 
-// Customized by MS
+// Customized by SY
 
 public class MainProductData {
 
-    private int image;
-    private String name;
+    private String proName;
     private int quantity;
+    private String image;
     private int originPrice;
     private int salePrice;
+    private int idProduct;
 
-    public MainProductData(int image, String name, int quantity, int originPrice, int salePrice) {
-        this.image = image;
-        this.name = name;
-        this.quantity = quantity;
-        this.originPrice = originPrice;
-        this.salePrice = salePrice;
-    }
+    public String getImage() { return image; }
 
-    public int getImage() { return image; }
-
-    public String getName() { return name; }
+    public String getName() { return proName; }
 
     public int getQuantity() { return quantity; }
 
@@ -28,14 +21,18 @@ public class MainProductData {
 
     public int getSalePrice() { return salePrice; }
 
-    public void setImage(int image) { this.image = image; }
+    public int getIdProduct() { return idProduct; }
 
-    public void setName(String proName) { this.name = proName; }
+    public void setImage(String image) { this.image = image; }
+
+    public void setName(String proName) { this.proName = proName; }
 
     public void setOriginPrice(int originPrice) { this.originPrice = originPrice; }
 
     public void setQuantity(int quantity) { this.quantity = quantity; }
 
     public void setSalePrice(int salePrice) { this.salePrice = salePrice; }
+
+    public void setIdProduct(int idProduct) { this.idProduct = idProduct; }
 
 }
