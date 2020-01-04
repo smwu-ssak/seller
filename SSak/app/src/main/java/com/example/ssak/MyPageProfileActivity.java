@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.ssak.DB.SharedPreferenceController;
 import com.example.ssak.Get.GetKakaoProfileResponse;
+import com.example.ssak.Get.GetStoreAddressResponse;
 import com.example.ssak.Get.GetStoreInformationResponse;
 import com.example.ssak.Network.ApplicationController;
 import com.example.ssak.Network.NetworkService;
@@ -30,6 +32,7 @@ public class MyPageProfileActivity extends AppCompatActivity {
 
     ApplicationController applicationController = new ApplicationController();
     NetworkService networkService = applicationController.buildNetworkService("http://52.79.193.54:3000/");
+    NetworkService kakaoService = applicationController.buildNetworkService("https://dapi.kakao.com/v2/local/search/");
 
     static final int SEARCH_ADDRESS_ACTIVITY = 200;
     TextView address;
@@ -69,21 +72,44 @@ public class MyPageProfileActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 String data = intent.getExtras().getString("data");
                 if (data != null) {
-                    responseStoreAddressToServer(data);
+                    responseStoreAddressToKakaoServer(data);
                 }
             }
         }
     }
 
-    public void responseStoreAddressToServer(final String address) {
+    public void responseStoreAddressToKakaoServer(final String address) {
 
+        // 위도, 경도 추출
+        Call<GetStoreAddressResponse> kakaoCall = kakaoService.getStoreAddressResponse("KakaoAK 90b989bdd867ac69136ad3d63551bf3e", address.substring(7));
+        kakaoCall.enqueue(new Callback<GetStoreAddressResponse>() {
+            @Override
+            public void onResponse(Call<GetStoreAddressResponse> call, Response<GetStoreAddressResponse> response) {
+                if (response.isSuccessful()) {
+                    String x = response.body().documents.get(0).getX();
+                    String y = response.body().documents.get(0).getY();
+                    Log.d("위치", x);
+                    Log.d("위치", y);
+                    float lat = Float.parseFloat(y);
+                    float log = Float.parseFloat(x);
+                    responseStoreAddressToServer(address.substring(7), lat, log);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetStoreAddressResponse> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    public void responseStoreAddressToServer(final String location, float lat, float log) {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("address", address);
-            // 위도, 경도 수정
-            jsonObject.put("lat", 37.544163);
-            jsonObject.put("log", 126.965948);
-            // 위도, 경도 수정
+            jsonObject.put("address", location);
+            jsonObject.put("lat", lat);
+            jsonObject.put("log", log);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -97,7 +123,7 @@ public class MyPageProfileActivity extends AppCompatActivity {
                     int status = response.body().status;
                     if (status == 200) {
                         TextView tv = findViewById(R.id.mypage_profile_act_address);
-                        tv.setText(address);
+                        tv.setText(location);
                     }
                 }
             }

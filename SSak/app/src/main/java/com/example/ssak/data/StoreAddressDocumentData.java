@@ -4,7 +4,11 @@ package com.example.ssak.data;
 
 public class StoreAddressDocumentData {
 
-    public String x;    // log
-    public String y;    // lat
+    private String x;    // log
+    private String y;    // lat
+
+    public String getX() { return x; }
+
+    public String getY() { return y; }
 
 }
