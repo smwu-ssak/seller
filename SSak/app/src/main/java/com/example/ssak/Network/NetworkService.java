@@ -47,7 +47,6 @@ public interface NetworkService {
     @Multipart
     @PATCH("mypage")
     Call<PatchKakaoProfileRequest> patchKakaoProfileRequest (
-            @Header("Content-type") String content_type,
             @Header("token") String token,
             @Part("name") RequestBody name,
             @Part MultipartBody.Part profile
