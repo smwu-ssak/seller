@@ -5,6 +5,7 @@ import com.example.ssak.Get.GetKakaoProfileResponse;
 import com.example.ssak.Patch.PatchKakaoProfileRequest;
 import com.example.ssak.Post.PostLoginResponse;
 import com.example.ssak.Post.PostRegisterStoreRequest;
+import com.example.ssak.Post.PostUploadProductRequest;
 import com.google.gson.JsonObject;
 
 import okhttp3.MultipartBody;
@@ -58,6 +59,20 @@ public interface NetworkService {
             @Header("Content-type") String content_type,
             @Header("token") String token,
             @Body() JsonObject body
+    );
+
+    // 상품 등록
+    @Multipart
+    @POST("product")
+    Call<PostUploadProductRequest> postUploadProductRequest (
+            @Header("token") String token,
+            @Part("name") RequestBody name,
+            @Part MultipartBody.Part image,
+            @Part("quantity") int quantity,
+            @Part("originPrice") int originPrice,
+            @Part("comment") RequestBody comment,
+            @Part("salePrice") int salePrice,
+            @Part("expDate") RequestBody expDate
     );
 
 }

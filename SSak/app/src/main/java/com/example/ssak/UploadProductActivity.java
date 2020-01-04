@@ -1,38 +1,62 @@
 package com.example.ssak;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.loader.content.CursorLoader;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.ssak.DB.SharedPreferenceController;
+import com.example.ssak.Network.ApplicationController;
+import com.example.ssak.Network.NetworkService;
+import com.example.ssak.Post.PostUploadProductRequest;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 // Customized by SY
 
 public class UploadProductActivity extends AppCompatActivity {
 
+    ApplicationController applicationController = new ApplicationController();
+    NetworkService networkService = applicationController.buildNetworkService();
+
     private static final int REQUEST_CODE = 200;
     private ImageView imageView;
     private RelativeLayout relativeLayout;
-    Date date = new Date();
+
+    String expDate = "";
+    MultipartBody.Part image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +65,7 @@ public class UploadProductActivity extends AppCompatActivity {
 
         uploadImage();
         goToMainActivity();
+        uploadProduct();
 
         Dateleft();
         Timeleft();
@@ -51,12 +76,16 @@ public class UploadProductActivity extends AppCompatActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-                intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, REQUEST_CODE);
+                requestReadExternalStoragePermission();
             }
         });
+    }
+
+    public void showAlbum() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+        intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, REQUEST_CODE);
     }
 
     @Override
@@ -66,9 +95,18 @@ public class UploadProductActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 try {
                     InputStream inputStream = getContentResolver().openInputStream(data.getData());
-                    Bitmap img = BitmapFactory.decodeStream(inputStream);
+                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                    // BitmapFactory.Options options = new BitmapFactory.Options();
+                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
                     inputStream.close();
-                    imageView.setImageBitmap(img);
+                    imageView.setImageBitmap(bitmap);
+
+                    String imgURI = getRealPathFromURI(data.getData());
+                    File photo = new File(imgURI);
+
+                    RequestBody photoBody = RequestBody.create(MediaType.parse("multipart/form-data"), photo);
+                    image = MultipartBody.Part.createFormData("image", photo.getName(), photoBody);
 
                     relativeLayout = findViewById(R.id.upload_product_img_layout);
                     relativeLayout.bringChildToFront(imageView);
@@ -123,20 +161,15 @@ public class UploadProductActivity extends AppCompatActivity {
                             case "Dec" : monthM = "12";  break;
                         }
 
-
                         String string = String.valueOf(calendar.getTime()).substring(30,34)+"/"+monthM+"/"+String.valueOf(calendar.getTime()).substring(8,10);
                         dateleft.setText(string);
-                        Log.d("날짜", String.valueOf(calendar.getTime()).substring(8,10));
-                        Log.d("날짜", String.valueOf(calendar.getTime()).substring(4,7));
-                        Log.d("날짜", String.valueOf(calendar.getTime()).substring(30,34));
+                        expDate = "";
+                        expDate += string;
+//                        Log.d("날짜", String.valueOf(calendar.getTime()).substring(8,10));
+//                        Log.d("날짜", String.valueOf(calendar.getTime()).substring(4,7));
+//                        Log.d("날짜", String.valueOf(calendar.getTime()).substring(30,34));
                         dateleft.setTextColor(Color.parseColor("#3A3A3A"));
 
-                        /*
-                        SimpleDateFormat simpleD = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
-                        dateleft.setText(simpleD.format(calendar.getTime()));
-                        dateleft.setTextColor(Color.parseColor("#3A3A3A"));
-
-                         */
                     }
                 };
                 new DatePickerDialog(view.getRootView().getContext(), onDateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
@@ -158,7 +191,8 @@ public class UploadProductActivity extends AppCompatActivity {
                         calendar.set(Calendar.MINUTE, minOf);
 
                         timeleft.setText(String.valueOf(calendar.getTime()).substring(11, 16));
-                        Log.d("시간", String.valueOf(calendar.getTime()).substring(11, 16)+":00");
+                        expDate += " "+String.valueOf(calendar.getTime()).substring(11, 16)+":00";
+//                        Log.d("시간", String.valueOf(calendar.getTime()).substring(11, 16)+":00");
                         timeleft.setTextColor(Color.parseColor("#3A3A3A"));
                     }
                 };
@@ -168,5 +202,94 @@ public class UploadProductActivity extends AppCompatActivity {
         });
     }
 
+    public void uploadProduct() {
+        RelativeLayout btn = findViewById(R.id.upload_act_bottom_btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                EditText nameEt = findViewById(R.id.upload_product_name_et);
+                String name = String.valueOf(nameEt.getText());
+                RequestBody nameBody = RequestBody.create(MediaType.parse("text/plain"), name);
+
+                EditText commentEt = findViewById(R.id.upload_product_comments_et);
+                String comment = String.valueOf(commentEt.getText());
+                RequestBody commentBody = RequestBody.create(MediaType.parse("text/plain"), comment);
+
+                EditText quantityEt = findViewById(R.id.upload_products_quantity);
+                int quantity = 0;
+                if (quantityEt.getText() != null)
+                    quantity = Integer.parseInt(String.valueOf(quantityEt.getText()));
+
+                EditText originPriceEt = findViewById(R.id.upload_products_price_origin);
+                int originPrice = 0;
+                if (originPriceEt.getText() != null)
+                    originPrice = Integer.parseInt(String.valueOf(originPriceEt.getText()));
+
+                EditText salePriceEt = findViewById(R.id.detail_act_products_price_sale);
+                int salePrice = 0;
+                if (salePriceEt.getText() != null)
+                    salePrice = Integer.parseInt(String.valueOf(salePriceEt.getText()));
+
+                RequestBody expDateBody = RequestBody.create(MediaType.parse("text/plain"), expDate);
+                Log.d("date", expDate);
+
+                Call<PostUploadProductRequest> call = networkService.postUploadProductRequest(SharedPreferenceController.getMyId(getApplicationContext()), nameBody, image, quantity, originPrice, commentBody, salePrice, expDateBody);
+                call.enqueue(new Callback<PostUploadProductRequest>() {
+                    @Override
+                    public void onResponse(Call<PostUploadProductRequest> call, Response<PostUploadProductRequest> response) {
+                        if (response.isSuccessful()) {
+                            int status = response.body().status;
+                            Log.d("status", String.valueOf(status));
+                            if (status == 200) {
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<PostUploadProductRequest> call, Throwable t) {
+                        Log.e("Upload error:", t.getMessage());
+                    }
+                });
+            }
+        });
+    }
+
+    public String getRealPathFromURI(Uri uri) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        CursorLoader loader = new CursorLoader(this, uri, proj, null, null, null);
+        Cursor cursor = loader.loadInBackground();
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String result = cursor.getString(column_index);
+        cursor.close();
+        return result;
+    }
+
+    public void requestReadExternalStoragePermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                // 사용자에게 권한을 왜 허용해야 되는지에 대한 메시지 추가
+            }
+            else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 200);
+            }
+        }
+        else
+            showAlbum();
+    }
+
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == 200) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                showAlbum();
+            }
+            else
+                finish();
+        }
+    }
 
 }
