@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.ssak.DB.SharedPreferenceController;
 import com.example.ssak.Get.GetKakaoProfileResponse;
+import com.example.ssak.Get.GetMainResponse;
 import com.example.ssak.Network.ApplicationController;
 import com.example.ssak.Network.NetworkService;
 import com.example.ssak.data.MainProductData;
@@ -103,15 +104,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void connectAdapter() {
-        RecyclerView recyclerView = findViewById(R.id.rv_main_product);
+        final RecyclerView recyclerView = findViewById(R.id.rv_main_product);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        adapter = new MainProductAdapter(data);
-        recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new RecyclerViewDecoration(15));
+        Call<GetMainResponse> call = networkService.getMainResponse("application/json", SharedPreferenceController.getMyId(getApplicationContext()));
+        call.enqueue(new Callback<GetMainResponse>() {
+            @Override
+            public void onResponse(Call<GetMainResponse> call, Response<GetMainResponse> response) {
+                if (response.isSuccessful()) {
+                    int status = response.body().status;
+                    if (status == 200) {
+                        TextView countTv = findViewById(R.id.main_act_product_quantity);
+                        int count = response.body().data.count;
+                        countTv.setText(String.valueOf(count));
 
-        data.add(new MainProductData(R.drawable.rv_main_apple, "사과", 20, 1000, 500));
-        data.add(new MainProductData(R.drawable.rv_main_broccoli, "브로콜리", 10, 2000, 1200));
+                        data = response.body().data.mainList;
+                        adapter = new MainProductAdapter(data);
+                        recyclerView.setAdapter(adapter);
+                        recyclerView.addItemDecoration(new RecyclerViewDecoration(15));
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetMainResponse> call, Throwable t) {
+
+            }
+        });
+
+//        data.add(new MainProductData(R.drawable.rv_main_apple, "사과", 20, 1000, 500));
+//        data.add(new MainProductData(R.drawable.rv_main_broccoli, "브로콜리", 10, 2000, 1200));
     }
 
     private long time = 0;
