@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -30,9 +31,21 @@ public class MyPageProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_page_profile);
 
         requestKakaoProfileDataToServer();
+        moveToTelEdit();
         moveToTimeEdit();
     }
 
+    //Customized by 민승
+    public void moveToTelEdit() {
+        Button button = findViewById(R.id.mypage_profile_act_tel_modify_btn);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MyPageNumActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
 
     public void moveToTimeEdit(){
         TextView button = findViewById(R.id.mypage_profile_act_time);
@@ -46,7 +59,6 @@ public class MyPageProfileActivity extends AppCompatActivity {
     }
 
 
-
     public void requestKakaoProfileDataToServer() {
         Call<GetKakaoProfileResponse> call = networkService.getKakaoProfileResponse("application/json", SharedPreferenceController.getMyId(getApplicationContext()));
         call.enqueue(new Callback<GetKakaoProfileResponse>() {
@@ -56,7 +68,7 @@ public class MyPageProfileActivity extends AppCompatActivity {
                     String imgUrl = response.body().data.userProfile;
                     String name = response.body().data.userName;
 
-                    ImageView imageView = findViewById(R.id.mypage_profile_act_user_img);
+                    de.hdodenhof.circleimageview.CircleImageView imageView = findViewById(R.id.mypage_profile_act_user_img);
                     Glide.with(getApplicationContext())
                             .load(imgUrl)
                             .into(imageView);
