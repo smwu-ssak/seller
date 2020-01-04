@@ -35,6 +35,7 @@ public class MyPageProfileActivity extends AppCompatActivity {
         requestStoreInformationToServer();
         moveToTelEdit();
         moveToTimeEdit();
+        goToPreviousPage();
     }
 
     // Customized by 민승
@@ -45,6 +46,7 @@ public class MyPageProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MyPageNumActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
@@ -56,6 +58,7 @@ public class MyPageProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MyPageTimeActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
@@ -114,4 +117,15 @@ public class MyPageProfileActivity extends AppCompatActivity {
     }
 
 
+    public void goToPreviousPage() {
+        RelativeLayout btn = findViewById(R.id.mypage_profile_act_back_btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MyPageActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
 }
