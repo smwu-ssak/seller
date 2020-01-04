@@ -130,7 +130,6 @@ public class RegisterProfileActivity extends AppCompatActivity {
 
                         String imgURI = getRealPathFromURI(data.getData());
                         File photo = new File(imgURI);
-                        Log.d("size", String.valueOf(photo.length()));
 
                         RequestBody photoBody = RequestBody.create(MediaType.parse("multipart/form-data"), photo);
                         image = MultipartBody.Part.createFormData("profile", photo.getName(), photoBody);
