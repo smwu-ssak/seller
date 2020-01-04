@@ -100,4 +100,12 @@ public interface NetworkService {
             @Body() JsonObject body
     );
 
+    // 스토어 주소 수정
+    @PATCH("mypage/seller/address")
+    Call<PatchStoreInformationRequest> patchStoreAddressRequest (
+            @Header("Content-type") String content_type,
+            @Header("token") String token,
+            @Body() JsonObject body
+    );
+
 }

@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MyPageNumActivity"></activity>
+        <activity android:name=".MyPageAddressWebViewActivity"></activity>
+        <activity android:name=".MyPageNumActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
