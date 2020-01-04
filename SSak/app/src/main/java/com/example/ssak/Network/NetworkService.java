@@ -3,7 +3,9 @@ package com.example.ssak.Network;
 import com.example.ssak.Get.GetAlreadySignedupUserResponse;
 import com.example.ssak.Get.GetKakaoProfileResponse;
 import com.example.ssak.Get.GetMainResponse;
+import com.example.ssak.Get.GetStoreInformationResponse;
 import com.example.ssak.Patch.PatchKakaoProfileRequest;
+import com.example.ssak.Patch.PatchStoreInformationRequest;
 import com.example.ssak.Post.PostLoginResponse;
 import com.example.ssak.Post.PostRegisterStoreRequest;
 import com.example.ssak.Post.PostUploadProductRequest;
@@ -81,6 +83,29 @@ public interface NetworkService {
     Call<GetMainResponse> getMainResponse (
             @Header("Content-type") String content_type,
             @Header("token") String token
+    );
+
+    // 스토어 정보 조회
+    @GET("mypage/seller")
+    Call<GetStoreInformationResponse> getStoreInformationResponse (
+            @Header("Content-type") String content_type,
+            @Header("token") String token
+    );
+
+    // 스토어 전화번호 수정
+    @PATCH("mypage/seller/tel")
+    Call<PatchStoreInformationRequest> patchStoreNumberRequest (
+            @Header("Content-type") String content_type,
+            @Header("token") String token,
+            @Body() JsonObject body
+    );
+
+    // 스토어 주소 수정
+    @PATCH("mypage/seller/address")
+    Call<PatchStoreInformationRequest> patchStoreAddressRequest (
+            @Header("Content-type") String content_type,
+            @Header("token") String token,
+            @Body() JsonObject body
     );
 
 }

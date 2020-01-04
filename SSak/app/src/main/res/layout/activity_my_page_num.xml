@@ -20,7 +20,7 @@
 
 
         <RelativeLayout
-            android:id="@+id/mypage_profile_act_back_btn"
+            android:id="@+id/mypage_profile_num_act_back_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
