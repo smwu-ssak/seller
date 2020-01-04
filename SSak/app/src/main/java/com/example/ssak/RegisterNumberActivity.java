@@ -33,7 +33,7 @@ import static com.example.ssak.RegisterProfileActivity.storeData;
 public class RegisterNumberActivity extends AppCompatActivity {
 
     ApplicationController applicationController = new ApplicationController();
-    NetworkService networkService = applicationController.buildNetworkService();
+    NetworkService networkService = applicationController.buildNetworkService("http://52.79.193.54:3000/");
 
     EditText telNum;
 

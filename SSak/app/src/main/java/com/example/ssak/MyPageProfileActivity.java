@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -27,12 +26,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.example.ssak.RegisterProfileActivity.storeData;
-
 public class MyPageProfileActivity extends AppCompatActivity {
 
     ApplicationController applicationController = new ApplicationController();
-    NetworkService networkService = applicationController.buildNetworkService();
+    NetworkService networkService = applicationController.buildNetworkService("http://52.79.193.54:3000/");
 
     static final int SEARCH_ADDRESS_ACTIVITY = 200;
     TextView address;

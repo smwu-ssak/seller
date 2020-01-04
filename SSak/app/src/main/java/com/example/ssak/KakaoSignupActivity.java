@@ -33,7 +33,7 @@ import retrofit2.Response;
 public class KakaoSignupActivity extends Activity {
 
     ApplicationController applicationController = new ApplicationController();
-    NetworkService networkService = applicationController.buildNetworkService();
+    NetworkService networkService = applicationController.buildNetworkService("http://52.79.193.54:3000/");
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
