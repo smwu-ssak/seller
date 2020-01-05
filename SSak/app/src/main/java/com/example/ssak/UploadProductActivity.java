@@ -81,43 +81,60 @@ public class UploadProductActivity extends AppCompatActivity {
     }
 
     public void limitText() {
-        final EditText editText = findViewById(R.id.upload_product_name_et);
+        final EditText edName = findViewById(R.id.upload_product_name_et);
+        final EditText edComment = findViewById(R.id.upload_product_comments_et);
+
+        final Toast toastN = Toast.makeText(this, "글자수를 초과했습니다(최대 10자)", Toast.LENGTH_SHORT);
+        final Toast toastC = Toast.makeText(this, "글자수를 초과했습니다(최대 20자)", Toast.LENGTH_SHORT);
 
         //특수문자 입력 제한 - 천지인 가능
-        editText.setFilters(new InputFilter[] {new InputFilter() {
+        edName.setFilters(new InputFilter[] {new InputFilter() {
             @Override
             public CharSequence filter(CharSequence charSequence, int start, int end, Spanned spanned, int dstart, int dend) {
                 for (int i = start; i < end; i++) {
                     if (!Character.isLetterOrDigit(charSequence.charAt(i))) {
                         return "";
                     }
-                }
-                return null;
+                } return null;
             }
         }});
-        final Toast toast = Toast.makeText(this, "글자수를 초과했습니다(최대 10자)", Toast.LENGTH_SHORT);
 
-        editText.addTextChangedListener(new TextWatcher() {
+        //글자 수 제한 - 상품명
+        edName.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence s, int i, int i1, int i2) { }
 
             @Override
-            public void onTextChanged(CharSequence s, int i, int i1, int i2) {
-
-            }
+            public void onTextChanged(CharSequence s, int i, int i1, int i2) { }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (editText.length() > 10) {
-                    toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 100);
-                    toast.show();
+                if (edName.length() > 10) {
+                    toastN.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 100);
+                    toastN.show();
 
-                    //글자 수 제한
                     InputFilter[] filters = new InputFilter[]{new InputFilter.LengthFilter(10)};
-                    editText.setFilters(filters);
+                    edName.setFilters(filters);
+                }
+            }
+        });
 
+        //글자 수 제한 - 상품 코멘트
+        edComment.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int i, int i1, int i2) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int i, int i1, int i2) { }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (edComment.length() > 20) {
+                    toastC.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 100);
+                    toastC.show();
+
+                    InputFilter[] filters = new InputFilter[]{new InputFilter.LengthFilter(20)};
+                    edComment.setFilters(filters);
                 }
             }
         });
