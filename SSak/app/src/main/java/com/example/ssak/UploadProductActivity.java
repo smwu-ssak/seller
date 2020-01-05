@@ -80,6 +80,7 @@ public class UploadProductActivity extends AppCompatActivity {
         limitText(); //글자수 제한, 토스트 띄우기
     }
 
+    //Customized by 민승
     public void limitText() {
         final EditText edName = findViewById(R.id.upload_product_name_et);
         final EditText edComment = findViewById(R.id.upload_product_comments_et);
@@ -140,6 +141,7 @@ public class UploadProductActivity extends AppCompatActivity {
         });
     }
 
+    //Customized by SY
     public void uploadImage() {
         imageView = findViewById(R.id.upload_product_img_iv);
         imageView.setOnClickListener(new View.OnClickListener() {

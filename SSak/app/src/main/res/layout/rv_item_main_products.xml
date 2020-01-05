@@ -193,7 +193,7 @@
                             android:fontFamily="@font/nanumbarungothic_normal"
                             android:text="50"
                             android:textColor="#FFFFFF"
-                            android:textSize="9dp" />
+                            android:textSize="12dp" />
 
                         <TextView
                             android:id="@+id/rv_item_main_products_discount_fix"
