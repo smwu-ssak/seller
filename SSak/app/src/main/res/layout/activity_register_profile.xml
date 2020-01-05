@@ -179,6 +179,7 @@
                 android:gravity="center"
                 android:hint="가게 이름"
                 android:maxLength="20"
+                android:singleLine="true"
                 android:textColor="#6E6E6E"
                 android:textColorHint="#A8A8A8"
                 android:textSize="20dp" />
