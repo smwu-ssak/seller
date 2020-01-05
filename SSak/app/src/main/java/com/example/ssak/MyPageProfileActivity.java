@@ -190,6 +190,8 @@ public class MyPageProfileActivity extends AppCompatActivity {
                             int status = response.body().status;
                             Log.d("status", String.valueOf(status));
                             if (status == 200) {
+                                Intent intent = new Intent(getApplicationContext(), MyPageActivity.class);
+                                startActivity(intent);
                                 finish();
                             }
                         }
