@@ -1,12 +1,14 @@
 package com.example.ssak;
 
+//Customized by 민승
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-//import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.LottieAnimationView;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -16,6 +18,8 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         //LottieAnimationView animationView = findViewById(R.id.splash_object);
+        //animationView.playAnimation();
+
         startLoading();
     }
 
@@ -28,10 +32,7 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 2000);
+        }, 1000);
     }
 
-    void splashAnimation() {
-
-    }
 }

@@ -8,6 +8,7 @@ import androidx.loader.content.CursorLoader;
 import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -17,7 +18,12 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.Spanned;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -54,6 +60,7 @@ public class UploadProductActivity extends AppCompatActivity {
     private static final int REQUEST_CODE = 200;
     private ImageView imageView;
     private RelativeLayout relativeLayout;
+    Context context;
 
     String expDate = "";
     MultipartBody.Part image;
@@ -69,6 +76,51 @@ public class UploadProductActivity extends AppCompatActivity {
 
         Dateleft();
         Timeleft();
+
+        limitText(); //글자수 제한, 토스트 띄우기
+    }
+
+    public void limitText() {
+        final EditText editText = findViewById(R.id.upload_product_name_et);
+
+        //특수문자 입력 제한 - 천지인 가능
+        editText.setFilters(new InputFilter[] {new InputFilter() {
+            @Override
+            public CharSequence filter(CharSequence charSequence, int start, int end, Spanned spanned, int dstart, int dend) {
+                for (int i = start; i < end; i++) {
+                    if (!Character.isLetterOrDigit(charSequence.charAt(i))) {
+                        return "";
+                    }
+                }
+                return null;
+            }
+        }});
+        final Toast toast = Toast.makeText(this, "글자수를 초과했습니다(최대 10자)", Toast.LENGTH_SHORT);
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (editText.length() > 10) {
+                    toast.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 100);
+                    toast.show();
+
+                    //글자 수 제한
+                    InputFilter[] filters = new InputFilter[]{new InputFilter.LengthFilter(10)};
+                    editText.setFilters(filters);
+
+                }
+            }
+        });
     }
 
     public void uploadImage() {
@@ -143,25 +195,49 @@ public class UploadProductActivity extends AppCompatActivity {
                         calendar.set(Calendar.MONTH, month);
                         calendar.set(Calendar.DAY_OF_MONTH, dayOf);
 
-                        String dateM = String.valueOf(calendar.getTime()).substring(4,7);
+                        String dateM = String.valueOf(calendar.getTime()).substring(4, 7);
                         String monthM = new String();
 
-                        switch(dateM) {
-                            case "Jan" : monthM = "01";  break;
-                            case "Feb" : monthM = "02";  break;
-                            case "Mar" : monthM = "03";  break;
-                            case "Apr" : monthM = "04";  break;
-                            case "May" : monthM = "05";  break;
-                            case "Jun" : monthM = "06";  break;
-                            case "Jul" : monthM = "07";  break;
-                            case "Aug" : monthM = "08";  break;
-                            case "Sep" : monthM = "09";  break;
-                            case "Oct" : monthM = "10";  break;
-                            case "Nov" : monthM = "11";  break;
-                            case "Dec" : monthM = "12";  break;
+                        switch (dateM) {
+                            case "Jan":
+                                monthM = "01";
+                                break;
+                            case "Feb":
+                                monthM = "02";
+                                break;
+                            case "Mar":
+                                monthM = "03";
+                                break;
+                            case "Apr":
+                                monthM = "04";
+                                break;
+                            case "May":
+                                monthM = "05";
+                                break;
+                            case "Jun":
+                                monthM = "06";
+                                break;
+                            case "Jul":
+                                monthM = "07";
+                                break;
+                            case "Aug":
+                                monthM = "08";
+                                break;
+                            case "Sep":
+                                monthM = "09";
+                                break;
+                            case "Oct":
+                                monthM = "10";
+                                break;
+                            case "Nov":
+                                monthM = "11";
+                                break;
+                            case "Dec":
+                                monthM = "12";
+                                break;
                         }
 
-                        String string = String.valueOf(calendar.getTime()).substring(30,34)+"/"+monthM+"/"+String.valueOf(calendar.getTime()).substring(8,10);
+                        String string = String.valueOf(calendar.getTime()).substring(30, 34) + "/" + monthM + "/" + String.valueOf(calendar.getTime()).substring(8, 10);
                         dateleft.setText(string);
                         expDate = "";
                         expDate += string;
@@ -191,7 +267,7 @@ public class UploadProductActivity extends AppCompatActivity {
                         calendar.set(Calendar.MINUTE, minOf);
 
                         timeleft.setText(String.valueOf(calendar.getTime()).substring(11, 16));
-                        expDate += " "+String.valueOf(calendar.getTime()).substring(11, 16)+":00";
+                        expDate += " " + String.valueOf(calendar.getTime()).substring(11, 16) + ":00";
 //                        Log.d("시간", String.valueOf(calendar.getTime()).substring(11, 16)+":00");
                         timeleft.setTextColor(Color.parseColor("#3A3A3A"));
                     }
@@ -273,12 +349,10 @@ public class UploadProductActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
                 // 사용자에게 권한을 왜 허용해야 되는지에 대한 메시지 추가
-            }
-            else {
+            } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 200);
             }
-        }
-        else
+        } else
             showAlbum();
     }
 
@@ -286,8 +360,7 @@ public class UploadProductActivity extends AppCompatActivity {
         if (requestCode == 200) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 showAlbum();
-            }
-            else
+            } else
                 finish();
         }
     }
