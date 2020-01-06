@@ -24,6 +24,7 @@
 ## Dependencies
 * Circle ImageView : de.hdodenhof:circleimageview
 * Image Upload : com.github.bumptech.glide:glide
+* Render After Effects animations natively : com.airbnb.android:lottie
 * HTTP RESTAPI Connected with Web Server : com.squareup.retrofit2:retrofit
 * Convert JSON into Object : com.squareup.retrofit2:converter-gson
 * Kakao Auth : com.kakao.sdk , name : 'usermgmt'
