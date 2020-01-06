@@ -3,7 +3,7 @@
 판매자용 안드로이드 어플리케이션
 <br> 
 <br> 
-![Alt text](Seed/README_resources/app_icon.png)
+![Alt text](SSak/README_resources/app_icon.png)
 <br>
 <br>
 **2020 KOREA HACKS**
@@ -33,4 +33,4 @@
 <br>
 
 ## App View
-![Alt text](Seed/README_resources/app_view_seller.jpg)
+![Alt text](SSak/README_resources/app_view_seller.jpg)
