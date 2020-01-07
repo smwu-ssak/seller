@@ -37,9 +37,6 @@ public class MainActivity extends AppCompatActivity {
     ApplicationController applicationController = new ApplicationController();
     NetworkService networkService = applicationController.buildNetworkService("http://52.79.193.54:3000/");
 
-    static ArrayList<MainProductData> data = new ArrayList();
-    static MainProductAdapter adapter;
-
     private CircleImageView circleImageView;
 
     @Override
@@ -48,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setMenubar();
+        requestCountToServer();
         requestKakaoProfileDataToServer();
         moveToMypage();
         uploadProducts();
@@ -66,6 +64,28 @@ public class MainActivity extends AppCompatActivity {
 
         tabs.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
+    }
+
+    public void requestCountToServer() {
+        Call<GetMainResponse> call = networkService.getMainResponse("application/json", SharedPreferenceController.getMyId(getApplicationContext()));
+        call.enqueue(new Callback<GetMainResponse>() {
+            @Override
+            public void onResponse(Call<GetMainResponse> call, Response<GetMainResponse> response) {
+                if (response.isSuccessful()) {
+                    int status = response.body().status;
+                    if (status == 200) {
+                        TextView countTv = findViewById(R.id.main_act_product_quantity);
+                        int count = response.body().data.count;
+                        countTv.setText(String.valueOf(count));
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetMainResponse> call, Throwable t) {
+
+            }
+        });
     }
 
     public void UptoLayout() {
