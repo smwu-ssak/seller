@@ -190,17 +190,6 @@ public class UploadProductActivity extends AppCompatActivity {
         }
     }
 
-    //Customized by 민승
-    public void goToMainActivity() {
-        RelativeLayout btn = findViewById(R.id.upload_act_back_btn);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-    }
-
     public void Dateleft() {
         final Calendar calendar = Calendar.getInstance();
         final TextView dateleft = findViewById(R.id.upload_products_act_dateleft);
@@ -382,6 +371,19 @@ public class UploadProductActivity extends AppCompatActivity {
             } else
                 finish();
         }
+    }
+
+    //Customized by 민승
+    public void goToMainActivity() {
+        RelativeLayout btn = findViewById(R.id.upload_act_back_btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
 }
