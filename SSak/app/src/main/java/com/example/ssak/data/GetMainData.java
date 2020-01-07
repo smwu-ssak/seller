@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class GetMainData {
 
     public int count;
-    public ArrayList<MainProductData> mainList;
+    public ArrayList<MainProductData> possibleList;
+    public ArrayList<MainProductData> impossibleList;
 
 }
