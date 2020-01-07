@@ -3,12 +3,14 @@ package com.example.ssak;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ import com.example.ssak.Get.GetMainResponse;
 import com.example.ssak.Network.ApplicationController;
 import com.example.ssak.Network.NetworkService;
 import com.example.ssak.data.MainProductData;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
@@ -44,11 +47,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setMenubar();
         requestKakaoProfileDataToServer();
         moveToMypage();
         uploadProducts();
-        connectAdapter();
         UptoLayout();
+    }
+
+    public void setMenubar() {
+        TabLayout tabs = findViewById(R.id.main_tabs);
+        tabs.addTab(tabs.newTab().setText("구조 요청 현황"));
+        tabs.addTab(tabs.newTab().setText("구조 완료 현황"));
+        tabs.setTabGravity(tabs.GRAVITY_FILL);
+
+        final ViewPager viewPager = findViewById(R.id.main_viewpager);
+        final MainFragmentPagerAdapter pagerAdapter = new MainFragmentPagerAdapter(getSupportFragmentManager(), 2);
+        viewPager.setAdapter(pagerAdapter);
+
+        tabs.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
     }
 
     public void UptoLayout() {
@@ -101,40 +118,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
-
-    public void connectAdapter() {
-        final RecyclerView recyclerView = findViewById(R.id.rv_main_product);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-
-        Call<GetMainResponse> call = networkService.getMainResponse("application/json", SharedPreferenceController.getMyId(getApplicationContext()));
-        call.enqueue(new Callback<GetMainResponse>() {
-            @Override
-            public void onResponse(Call<GetMainResponse> call, Response<GetMainResponse> response) {
-                if (response.isSuccessful()) {
-                    int status = response.body().status;
-                    if (status == 200) {
-                        TextView countTv = findViewById(R.id.main_act_product_quantity);
-                        int count = response.body().data.count;
-                        countTv.setText(String.valueOf(count));
-
-                        data = response.body().data.mainList;
-                        adapter = new MainProductAdapter(data);
-                        recyclerView.setAdapter(adapter);
-                        recyclerView.addItemDecoration(new RecyclerViewDecoration(15));
-                        adapter.notifyDataSetChanged();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<GetMainResponse> call, Throwable t) {
-
-            }
-        });
-
-//        data.add(new MainProductData(R.drawable.rv_main_apple, "사과", 20, 1000, 500));
-//        data.add(new MainProductData(R.drawable.rv_main_broccoli, "브로콜리", 10, 2000, 1200));
     }
 
     private long time = 0;
